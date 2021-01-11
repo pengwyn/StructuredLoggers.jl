@@ -18,7 +18,7 @@ function Logging.handle_message(::StructuredLogger, level, message, _module, gro
         Logging.Error => LIGHT_RED_FG(rpad("error", level_len))
         _ => WHITE_FG(rpad(string(level), level_len))
     end
-    print(stderr, join([LIGHT_GRAY_FG(Dates.format(now(), "yyyy-mm-ddTHH:MM:SS:sss")),
+    println(stderr, join([LIGHT_GRAY_FG(Dates.format(now(), "yyyy-mm-ddTHH:MM:SS:sss")),
                         "[$level_str]",
                         rpad(message, 30),
                         (map(collect(kwds)) do (key,val)
