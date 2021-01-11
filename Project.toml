@@ -3,6 +3,12 @@ uuid = "38666ca6-b445-4d96-b4fa-635e9e3f6d85"
 authors = ["Daniel Cocks <daniel.cocks@gmail.com> and contributors"]
 version = "0.1.0"
 
+[deps]
+Crayons = "a8cc5b0e-0ffa-5ad4-8c14-923d3ee1735f"
+Dates = "ade2ca70-3891-5945-98fb-dc099432e06a"
+Logging = "56ddb016-857b-54e1-b83d-db4d58db5568"
+Match = "7eb4fadd-790c-5f42-8a69-bfa0b872bfbf"
+
 [compat]
 julia = "1"
 
