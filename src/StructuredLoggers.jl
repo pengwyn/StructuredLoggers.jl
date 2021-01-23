@@ -6,9 +6,12 @@ using Crayons.Box
 export StructuredLogger,
     global_logger
 
-struct StructuredLogger <: AbstractLogger end
+struct StructuredLogger <: AbstractLogger
+    app_name::String
+end
+StructuredLogger() = StructuredLogger("")
 
-function Logging.handle_message(::StructuredLogger, level, message, _module, group, id, file, line; kwds...)
+function Logging.handle_message(logger::StructuredLogger, level, message, _module, group, id, file, line; kwds...)
     # Note: because of the colors, rpad gets confused. So need to pad before the colour is applied.
     level_len = 7
     level_str = @match level begin
@@ -17,6 +20,10 @@ function Logging.handle_message(::StructuredLogger, level, message, _module, gro
         Logging.Warn => LIGHT_YELLOW_FG(rpad("warning", level_len))
         Logging.Error => LIGHT_RED_FG(rpad("error", level_len))
         _ => WHITE_FG(rpad(string(level), level_len))
+    end
+
+    if logger.app_name != ""
+        message = "$(logger.app_name): $message"
     end
     println(stderr, join([LIGHT_GRAY_FG(Dates.format(now(), "yyyy-mm-ddTHH:MM:SS:sss")),
                         "[$level_str]",
