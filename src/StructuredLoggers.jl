@@ -23,7 +23,7 @@ function Logging.handle_message(logger::StructuredLogger, level, message, _modul
     end
 
     if logger.app_name != ""
-        message = "$(logger.app_name): $message"
+        message = string(LIGHT_GRAY_FG("$(logger.app_name): ")) * message
     end
     println(stderr, join([LIGHT_GRAY_FG(Dates.format(now(), "yyyy-mm-ddTHH:MM:SS:sss")),
                         "[$level_str]",
